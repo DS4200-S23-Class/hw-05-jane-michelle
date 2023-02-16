@@ -1,0 +1,36 @@
+/* Change font to Arial for the web page */
+body {
+	font-family: Arial;
+}
+
+/* Center align headers */
+.centered {
+	text-align: center;
+}
+
+/* Flexbox container for children */
+.container {
+  display: flex;
+}
+
+/* Children 1 that takes up 60% of the page */
+#column1 {
+  flex: 60%;
+}
+
+/* Children 2 that takes up 40% of the page */
+#column2 {
+	flex: 40%;
+}
+
+/* Set height and width of the svg frame */
+#frame {
+	width: 500px;
+	height: 500px;
+}
+
+/* Style axes color and width */
+.axes {
+	stroke: rgb(0, 0, 0);
+	stroke-width: 2;
+}
