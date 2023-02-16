@@ -56,6 +56,7 @@ function scatterPlot() {
 	        .style("font-size", 12)
 	        .text("y");
 
+	    // Add tick marks for x axis
 		FRAME1.append("g")
 			.attr("transform", 
 				"translate(" + MARGINS.left + "," + (VIS_HEIGHT + MARGINS.top) + ")")
@@ -63,12 +64,14 @@ function scatterPlot() {
 				.attr("font-size", "10px");
 
 
+		// Add tick marks for y axis 
 		FRAME1.append("g")
 			.attr("transform", 
 				"translate(" + MARGINS.left + "," + (MARGINS.bottom) + ")")
 			.call(d3.axisLeft(Y_SCALE).ticks(9))
 				.attr("font-size", "10px");
 
+		// Plot scatter plot
         FRAME1.append("g")
 	        .selectAll("dot")
 	        .data(data)
@@ -80,20 +83,32 @@ function scatterPlot() {
 	        .style("fill", "#CC0000")
 	        .attr("class", "point");
 
-	    // mouseover
+	    // Mouseover
 		function handleMouseover(event, d) {
 			d3.select(this).style("fill", "#00c");
 		}
 
-		// mouseleave
+		// Mouseleave
 		function handleMouseleave(event, d) {
 			d3.select(this).style("fill", "#CC0000");
 		}
 
-		// add event listeners to the points for mouseover and mouseleave
+		// Add border to points if it is not there and remove border if it is there
+		function onClick(event, d) {
+			if (d3.select(this).attr("stroke") !== "none") {
+		        d3.select(this).attr("stroke", "none"); 
+		    // Otherwise, show it 
+		    } else {
+		        d3.select(this).attr("stroke", "black"); 
+		    };
+		}
+
+		// Add event listeners to the points for mouseover, mouseleave, and onclick
 		FRAME1.selectAll(".point")
 				.on("mouseover", handleMouseover)
-				.on("mouseleave", handleMouseleave);
+				.on("mouseleave", handleMouseleave)
+				.on("click", onClick);
+
 
 	});
 
