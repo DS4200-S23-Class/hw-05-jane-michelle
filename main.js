@@ -77,7 +77,23 @@ function scatterPlot() {
 	        .attr("cx", (d) => {return X_SCALE(d.x) + MARGINS.left;})
 			.attr("cy", (d) => {return Y_SCALE(d.y) + MARGINS.top;})
 	        .attr("r", 4)
-	        .style("fill", "#CC0000");
+	        .style("fill", "#CC0000")
+	        .attr("class", "point");
+
+	    // mouseover
+		function handleMouseover(event, d) {
+			d3.select(this).style("fill", "#00c");
+		}
+
+		// mouseleave
+		function handleMouseleave(event, d) {
+			d3.select(this).style("fill", "#CC0000");
+		}
+
+		// add event listeners to the points for mouseover and mouseleave
+		FRAME1.selectAll(".point")
+				.on("mouseover", handleMouseover)
+				.on("mouseleave", handleMouseleave);
 
 	});
 
