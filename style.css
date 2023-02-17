@@ -23,14 +23,17 @@ body {
 	flex: 40%;
 }
 
-/* Set height and width of the svg frame */
-#frame {
-	width: 500px;
-	height: 500px;
-}
-
 /* Style axes color and width */
 .axes {
 	stroke: rgb(0, 0, 0);
 	stroke-width: 2;
+}
+
+.tooltip {
+	position: absolute;
+	background-color: grey;
+	border: solid;
+	border-width: 2px;
+	border-radius: 5px;
+	padding: 5px;
 }

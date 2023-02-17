@@ -127,28 +127,6 @@ function barChart() {
 	// reading from the bar chart file
 	d3.csv("data/bar-data.csv").then((data) => {
 
-		// // Find max of y 
-		// const MAX_Y = d3.max(data, (d) => {
-		// 	return parseInt(d.amount)
-		// }) 
-
-		// // Scale function for y 
-		// const Y_SCALE = d3.scaleLinear()
-		// 					.domain([0, (MAX_Y)])
-		// 					.range([VIS_HEIGHT, 0]);
-
-		// // Find max of x 
-		// const MAX_X = d3.max(data, (d) => {
-		// 	return parseInt(d.category)
-		// });
-
-		// // Scale function for x
-		// const X_SCALE = d3.scaleLinear()
-		// 					.domain([0, (MAX_X)])
-		// 					.range([0, VIS_WIDTH]);
-
-
-
 		// Title
         FRAME2.append("text")
 	        .attr("x", MARGINS.left + VIS_WIDTH/2)
@@ -169,17 +147,19 @@ function barChart() {
         FRAME2.append("text")
 	        .attr("text-anchor", "middle")
 	        .attr("x", MARGINS.left - 50)
-	        .attr("y", VIS_HEIGHT - 100)
+	        .attr("y", VIS_HEIGHT - 200)
 	        .style("font-size", 12)
 	        .text("amount");
 
 	     // Add X axis
 		const x = d3.scaleBand()
 	  		.range([ 0, VIS_WIDTH ])
-			  .domain(data.map(function(d) { return d.category; }))
+			  .domain(data.map(function(d) { return d.category;}))
 			  .padding(0.2);
 		FRAME2.append("g")
-		  .attr("transform", "translate(0," + VIS_HEIGHT + ")")
+			.attr("transform", "translate(" + MARGINS.left + ", " + (VIS_HEIGHT + MARGINS.top) + ")")
+
+
 		  .call(d3.axisBottom(x))
 		  .selectAll("text")
 		    .attr("transform", "translate(-10,0)rotate(-45)")
@@ -195,39 +175,57 @@ function barChart() {
 		  .domain([0, (MAX_Y)])
 		  .range([ VIS_HEIGHT, 0]);
 		FRAME2.append("g")
-		  .call(d3.axisLeft(y).ticks(6));
-		// // Add Y axis
-		// const y = d3.scaleLinear()
-		//   .domain([0, 100000])
-		//   .range([ VIS_HEIGHT, 0]);
-		// FRAME1.append("g")
-		//   .call(d3.axisLeft(y).ticks(6));
-
-	    // // Add tick marks for x axis
-		// FRAME1.append("g")
-		// 	.attr("transform", 
-		// 		"translate(" + MARGINS.left + "," + (VIS_HEIGHT + MARGINS.top) + ")")
-		// 	.call(d3.axisBottom(X_SCALE).ticks(9))
-		// 		.attr("font-size", "10px");
-
-
-		// Add tick marks for y axis 
-		FRAME2.append("g")
 			.attr("transform", 
-				"translate(" + MARGINS.left + "," + (MARGINS.bottom) + ")")
-			.call(d3.axisLeft(y).ticks(10))
-				.attr("font-size", "10px");
+					"translate(" + MARGINS.left + "," + (MARGINS.bottom) + ")")
+		  .call(d3.axisLeft(y).ticks(6))
+		  	.attr("font-size", "10px");
 
 		// Bars
 		FRAME2.selectAll("mybar")
 		  .data(data)
 		  .enter()
 		  .append("rect")
-		    .attr("x", function(d) { return x(d.category); })
-		    .attr("y", function(d) { return y(d.amount); })
+		    .attr("x", function(d) { return x(d.category) + MARGINS.left; })
+		    .attr("y", function(d) { return y(d.amount) + MARGINS.bottom; })
 		    .attr("width", x.bandwidth())
 		    .attr("height", function(d) { return VIS_HEIGHT - y(d.amount); })
-		    .attr("fill", "#69b3a2");
+		    .attr("fill", "#69b3a2")
+		    .attr("class", "bar");
+
+		// create a tooltip
+		const TOOLTIP = d3.select("#vis3")
+			.append("div")
+			.attr("class", "tooltip")
+			// make it non visible at first
+			.style("opacity", 0);
+
+		// Mouseover
+		function barHover(event, d) {
+			d3.select(this).style("fill", "#00c");
+			TOOLTIP.style("opacity", 1);
+		}
+
+		// Mouseleave
+		function barLeave(event, d) {
+			d3.select(this).style("fill", "#69b3a2");
+			TOOLTIP.style("opacity", 0);
+		}
+
+		// mousemove - fill in information on the tooltip
+		function barMove(event, d) {
+			// set html on the tooltip
+			TOOLTIP.html("Category:" + d.category + "<br>Value: " + d.amount)
+					// where we want to tooltip positioned - should be relative to the event
+					// where the event occurred based on x and y pixels
+					.style("left", (event.pageX) + "px")
+					.style("top", (event.pageY) + "px");
+		}
+
+		// Add event listeners to the points for mouseover, mouseleave, and mousemove
+		FRAME2.selectAll(".bar")
+				.on("mouseover", barHover)
+				.on("mouseleave", barLeave)
+				.on("mousemove", barMove)
 
 	});
 }
