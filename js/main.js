@@ -114,9 +114,7 @@ function scatterPlot() {
 		       	d3.select("#showPoint").text("Last Point Clicked: (" + d["x"] + "," + d["y"] + ")");
 
 		    };
-		}
-
-
+		};
 
 		// Add event listeners to the points for mouseover, mouseleave, and onclick
 		FRAME1.selectAll(".point")
@@ -252,3 +250,32 @@ function setYValue() {
 	let y_coord = document.getElementById("y_coord").value;
 }
 
+let dataset = []
+// Add point to scatterplot
+function addPoint(){
+	//d3.csv("data/scatter-data.csv").then((data) => {
+    //for (var i = 0; i < data.length; i++) {
+       // dataset.push([data[i].x, data[i].y]);
+    	//}
+	//});
+	
+	// set the x and y coordinate values for new point
+	let x_coord = document.getElementById("x_coord").value;
+	let y_coord = document.getElementById("y_coord").value;
+	
+	dataset.push([x_coord, y_coord]);
+
+	// Plot scatter plot
+    FRAME1.append("g")
+	        .append("circle")
+	        .attr("cx", (x_coord))
+			.attr("cy", (y_coord))
+	        .attr("r", 10)
+	        .style("fill", "#CC0000")
+	        .attr("class", "point")
+	        .attr("stroke", "none")
+	        .attr("transform", 
+			"translate(" + (125 + (x_coord-1) * 50)  + "," + ((475 - ((y_coord-1) * 50)) + ")"));
+
+	}
+document.getElementById("subButton").addEventListener("click", addPoint);
