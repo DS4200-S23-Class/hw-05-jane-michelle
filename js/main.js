@@ -23,7 +23,7 @@ const FRAME1 = d3.select("#vis1")
 
 		// Add border to points if it is not there and remove border if it is there and show coordinate of point
 		function onClick(event, d) {
-			// if there is border, remove border and show coordinates
+			// If there is border, remove border and show coordinates
 			if (d3.select(this).attr("stroke") !== "none") {
 		        d3.select(this).attr("stroke", "none")
 		        d3.select(this).attr("stroke-width", "5")
@@ -33,7 +33,7 @@ const FRAME1 = d3.select("#vis1")
 		    } else {
 		        d3.select(this).attr("stroke", "black")
 		       	d3.select(this).attr("stroke-width", "5")
-
+		       	
 		       	d3.select("#showPoint").text("Last Point Clicked: (" + d["x"] + "," + d["y"] + ")");
 
 		    };
@@ -93,8 +93,7 @@ function scatterPlot() {
 				"translate(" + MARGINS.left + "," + (VIS_HEIGHT + MARGINS.top) + ")")
 			.call(d3.axisBottom(X_SCALE).ticks(9))
 				.attr("font-size", "10px");
-
-
+		
 		// Add tick marks for y axis 
 		FRAME1.append("g")
 			.attr("transform", 
@@ -238,22 +237,14 @@ function barChart() {
 }
 barChart();
 
-let dataset = []
+
 // Add point to scatterplot
-function addPoint(){
-	//d3.csv("data/scatter-data.csv").then((data) => {
-    //for (var i = 0; i < data.length; i++) {
-       // dataset.push([data[i].x, data[i].y]);
-    	//}
-	//});
-	
+function addPoint() {
 	// set the x and y coordinate values for new point
 	let x_coord = document.getElementById("x_coord").value;
 	let y_coord = document.getElementById("y_coord").value;
 	
-	dataset.push([x_coord, y_coord]);
-
-	// Plot scatter plot
+	// Add point to scatterplot
     FRAME1.append("g")
 	        .append("circle")
 	        .attr("cx", (x_coord))
@@ -265,6 +256,7 @@ function addPoint(){
 	        .attr("transform", 
 			"translate(" + (125 + (x_coord-1) * 50)  + "," + ((475 - ((y_coord-1) * 50)) + ")"));
 
+	    // Add event listeners to the new added points for mouseover, mouseleave, and click
 		FRAME1.selectAll(".point")
 				.on("mouseover", handleMouseover)
 				.on("mouseleave", handleMouseleave)
@@ -272,4 +264,5 @@ function addPoint(){
 
 
 	}
+// Add event listener to subButton
 document.getElementById("subButton").addEventListener("click", addPoint);
