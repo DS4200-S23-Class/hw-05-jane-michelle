@@ -83,9 +83,10 @@ function scatterPlot() {
 	        .append("circle")
 	        .attr("cx", (d) => {return X_SCALE(d.x) + MARGINS.left;})
 			.attr("cy", (d) => {return Y_SCALE(d.y) + MARGINS.top;})
-	        .attr("r", 4)
+	        .attr("r", 10)
 	        .style("fill", "#CC0000")
-	        .attr("class", "point");
+	        .attr("class", "point")
+	        .attr("stroke", "none");
 
 	    // Mouseover
 		function handleMouseover(event, d) {
@@ -97,13 +98,21 @@ function scatterPlot() {
 			d3.select(this).style("fill", "#CC0000");
 		}
 
-		// Add border to points if it is not there and remove border if it is there
+		// Add border to points if it is not there and remove border if it is there and show coordinate of point
 		function onClick(event, d) {
+			// if there is border, remove border and show coordinates
 			if (d3.select(this).attr("stroke") !== "none") {
-		        d3.select(this).attr("stroke", "none"); 
-		    // Otherwise, show it 
+		        d3.select(this).attr("stroke", "none")
+		        d3.select(this).attr("stroke-width", "5")
+		        d3.select("#showPoint").text("Last Point Clicked: (" + d["x"] + "," + d["y"] + ")")
+
+		    // Otherwise, show border and coordinates
 		    } else {
-		        d3.select(this).attr("stroke", "black"); 
+		        d3.select(this).attr("stroke", "black")
+		       	d3.select(this).attr("stroke-width", "5")
+
+		       	d3.select("#showPoint").text("Last Point Clicked: (" + d["x"] + "," + d["y"] + ")");
+ 
 		    };
 		}
 
@@ -230,3 +239,4 @@ function barChart() {
 	});
 }
 barChart();
+
