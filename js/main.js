@@ -116,21 +116,7 @@ function scatterPlot() {
 		    };
 		}
 
-		// add a function to add a point to the graph when submit button is clicked
-		function addPoint(subButton){
-	
-			// set the x and y coordinate values for new point
-			let x_coord = document.getElementById('x_coord').value;
-			let y_coord = document.getElementById('y_coord').value;
 
-			let point = "{x:" + x_coord + "," + "y:" + y_coord + "}"
-			
-			let x = (x_coord * 45)
-			let y = (y_coord * 75)
-			
-		};
-
-			document.getElementById('subButton').addEventListener("click", () => {addPoint()});
 
 		// Add event listeners to the points for mouseover, mouseleave, and onclick
 		FRAME1.selectAll(".point")
