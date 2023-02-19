@@ -11,7 +11,34 @@ const FRAME1 = d3.select("#vis1")
 					.attr("height", FRAME_HEIGHT)
 					.attr("width", FRAME_WIDTH)
 					.attr("class", "frame");
+  // Mouseover
+		function handleMouseover(event, d) {
+			d3.select(this).style("fill", "#00c");
+		}
 
+		// Mouseleave
+		function handleMouseleave(event, d) {
+			d3.select(this).style("fill", "#CC0000");
+		}
+
+		// Add border to points if it is not there and remove border if it is there and show coordinate of point
+		function onClick(event, d) {
+			// if there is border, remove border and show coordinates
+			if (d3.select(this).attr("stroke") !== "none") {
+		        d3.select(this).attr("stroke", "none")
+		        d3.select(this).attr("stroke-width", "5")
+		        d3.select("#showPoint").text("Last Point Clicked: (" + d["x"] + "," + d["y"] + ")")
+
+		    // Otherwise, show border and coordinates
+		    } else {
+		        d3.select(this).attr("stroke", "black")
+		       	d3.select(this).attr("stroke-width", "5")
+
+		       	d3.select("#showPoint").text("Last Point Clicked: (" + d["x"] + "," + d["y"] + ")");
+
+		    };
+		};
+		
 function scatterPlot() {
 	// reading from scatter plot file
 	d3.csv("data/scatter-data.csv").then((data) => {
@@ -87,34 +114,6 @@ function scatterPlot() {
 	        .style("fill", "#CC0000")
 	        .attr("class", "point")
 	        .attr("stroke", "none");
-
-	    // Mouseover
-		function handleMouseover(event, d) {
-			d3.select(this).style("fill", "#00c");
-		}
-
-		// Mouseleave
-		function handleMouseleave(event, d) {
-			d3.select(this).style("fill", "#CC0000");
-		}
-
-		// Add border to points if it is not there and remove border if it is there and show coordinate of point
-		function onClick(event, d) {
-			// if there is border, remove border and show coordinates
-			if (d3.select(this).attr("stroke") !== "none") {
-		        d3.select(this).attr("stroke", "none")
-		        d3.select(this).attr("stroke-width", "5")
-		        d3.select("#showPoint").text("Last Point Clicked: (" + d["x"] + "," + d["y"] + ")")
-
-		    // Otherwise, show border and coordinates
-		    } else {
-		        d3.select(this).attr("stroke", "black")
-		       	d3.select(this).attr("stroke-width", "5")
-
-		       	d3.select("#showPoint").text("Last Point Clicked: (" + d["x"] + "," + d["y"] + ")");
-
-		    };
-		};
 
 		// Add event listeners to the points for mouseover, mouseleave, and onclick
 		FRAME1.selectAll(".point")
@@ -239,17 +238,6 @@ function barChart() {
 }
 barChart();
 
-
-// set x value for coordinate once selected value from options
-function setXValue() {
-	let x_coord = document.getElementById("x_coord").value;
-}
-
-// set y value for coordinate once selected value from options
-function setYValue() {
-	let y_coord = document.getElementById("y_coord").value;
-}
-
 let dataset = []
 // Add point to scatterplot
 function addPoint(){
@@ -276,6 +264,12 @@ function addPoint(){
 	        .attr("stroke", "none")
 	        .attr("transform", 
 			"translate(" + (125 + (x_coord-1) * 50)  + "," + ((475 - ((y_coord-1) * 50)) + ")"));
+
+		FRAME1.selectAll(".point")
+				.on("mouseover", handleMouseover)
+				.on("mouseleave", handleMouseleave)
+				.on("click", onClick); 
+
 
 	}
 document.getElementById("subButton").addEventListener("click", addPoint);
