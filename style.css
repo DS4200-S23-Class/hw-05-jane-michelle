@@ -37,3 +37,25 @@ body {
 	border-radius: 5px;
 	padding: 5px;
 }
+
+/* format button */
+button {
+	line-height: 1;
+	padding:5px;
+}
+
+/* format text size */
+text {
+	font-size: 15px;
+}
+
+/* format select */
+select {
+	padding-inline: 5px;
+
+}
+
+/* format label */
+label {
+	line-height: 2.5;
+}
