@@ -33,7 +33,7 @@ const FRAME1 = d3.select("#vis1")
 		    } else {
 		        d3.select(this).attr("stroke", "black")
 		       	d3.select(this).attr("stroke-width", "5")
-		       	
+
 		       	d3.select("#showPoint").text("Last Point Clicked: (" + d["x"] + "," + d["y"] + ")");
 
 		    };
@@ -237,6 +237,27 @@ function barChart() {
 }
 barChart();
 
+// Add border to points if it is not there and remove border if it is there and show coordinate of point
+function onClick2(event, d) {
+	// If there is border, remove border and show coordinates
+	if (d3.select(this).attr("stroke") !== "none") {
+		d3.select(this).attr("stroke", "none")
+		d3.select(this).attr("stroke-width", "5")
+		
+		let clickedPt = document.getElementById();
+		console.log(clickedPt);
+		d3.select("#showPoint").text("Last Point Clicked: (" + x_coord + "," + y_coord + ")")
+
+		// Otherwise, show border and coordinates
+		} else {
+		    d3.select(this).attr("stroke", "black")
+		    d3.select(this).attr("stroke-width", "5")
+		       	
+		    d3.select("#showPoint").text("Last Point Clicked: (" + x_coord + "," + y_coord + ")");
+
+		};
+	};
+
 
 // Add point to scatterplot
 function addPoint() {
@@ -256,13 +277,14 @@ function addPoint() {
 	        .attr("transform", 
 			"translate(" + (125 + (x_coord-1) * 50)  + "," + ((475 - ((y_coord-1) * 50)) + ")"));
 
+	
 	    // Add event listeners to the new added points for mouseover, mouseleave, and click
 		FRAME1.selectAll(".point")
 				.on("mouseover", handleMouseover)
 				.on("mouseleave", handleMouseleave)
-				.on("click", onClick); 
-
+				.on("click", onClick2); 
 
 	}
+
 // Add event listener to subButton
 document.getElementById("subButton").addEventListener("click", addPoint);
