@@ -11,34 +11,64 @@ const FRAME1 = d3.select("#vis1")
 					.attr("height", FRAME_HEIGHT)
 					.attr("width", FRAME_WIDTH)
 					.attr("class", "frame");
-  // Mouseover
-		function handleMouseover(event, d) {
-			d3.select(this).style("fill", "#00c");
-		}
+ // Mouseover
+function handleMouseover(event, d) {
+	d3.select(this).style("fill", "#00c");
+}
 
-		// Mouseleave
-		function handleMouseleave(event, d) {
-			d3.select(this).style("fill", "#CC0000");
-		}
+// Mouseleave
+function handleMouseleave(event, d) {
+	d3.select(this).style("fill", "#CC0000");
+}
 
-		// Add border to points if it is not there and remove border if it is there and show coordinate of point
-		function onClick(event, d) {
-			// If there is border, remove border and show coordinates
-			if (d3.select(this).attr("stroke") !== "none") {
-		        d3.select(this).attr("stroke", "none")
-		        d3.select(this).attr("stroke-width", "5")
-		        d3.select("#showPoint").text("Last Point Clicked: (" + d["x"] + "," + d["y"] + ")")
+// Add border to points if it is not there and remove border if it is there and show coordinate of point
+function onClick(event, d) {
+	// If there is border, remove border and show coordinates
+	if (d3.select(this).attr("stroke") !== "none") {
+        d3.select(this).attr("stroke", "none")
+        d3.select(this).attr("stroke-width", "5")
 
-		    // Otherwise, show border and coordinates
-		    } else {
-		        d3.select(this).attr("stroke", "black")
-		       	d3.select(this).attr("stroke-width", "5")
+        // console.log(typeof d.x)
 
-		       	d3.select("#showPoint").text("Last Point Clicked: (" + d["x"] + "," + d["y"] + ")");
+        if (typeof d.x !== 'string') {
+        	d3.select("#showPoint").text("Last Point Clicked: (" + x_coord + "," + y_coord + ")")
+        } else {
+			d3.select("#showPoint").text("Last Point Clicked: (" + d.x + "," + d.y + ")")
 
+        }
+	    // Otherwise, show border and coordinates
+	    } else {
+	        d3.select(this).attr("stroke", "black")
+	       	d3.select(this).attr("stroke-width", "5")
+
+			if (typeof d.x !== 'string') {
+        		d3.select("#showPoint").text("Last Point Clicked: (" + x_coord + "," + y_coord + ")")
+			} else {
+				d3.select("#showPoint").text("Last Point Clicked: (" + d.x + "," + d.y + ")")
+
+			        }
 		    };
 		};
-		
+
+function pointClicked(point){
+	// variable to store the point
+	let clickedPt = document.getElementById(point);
+
+	// variable to store text that tells user the last point clicked
+	let newText = "Last Point Clicked: " + point;
+
+	// assign the variable to the id 
+	document.getElementById("showPoint").innerHTML = newText;
+}
+
+// add event handler - looping/iterating through list of points and use anonymous function to execute pointClicked
+let pts = document.getElementsByTagName("circle");
+for (let idx = 0; idx < pts.length; idx++){
+    pts[idx].addEventListener("click", () => {pointClicked(pts[idx].id)});
+}
+
+
+
 function scatterPlot() {
 	// reading from scatter plot file
 	d3.csv("data/scatter-data.csv").then((data) => {
@@ -237,27 +267,26 @@ function barChart() {
 }
 barChart();
 
-// Add border to points if it is not there and remove border if it is there and show coordinate of point
-function onClick2(event, d) {
-	// If there is border, remove border and show coordinates
-	if (d3.select(this).attr("stroke") !== "none") {
-		d3.select(this).attr("stroke", "none")
-		d3.select(this).attr("stroke-width", "5")
+// // Add border to points if it is not there and remove border if it is there and show coordinate of point
+// function onClick2(event, d) {
+// 	// If there is border, remove border and show coordinates
+// 	if (d3.select(this).attr("stroke") !== "none") {
+// 		d3.select(this).attr("stroke", "none")
+// 		d3.select(this).attr("stroke-width", "5")
 		
-		let clickedPt = document.getElementById();
-		console.log(clickedPt);
-		d3.select("#showPoint").text("Last Point Clicked: (" + x_coord + "," + y_coord + ")")
+// 		let clickedPt = document.getElementById(point);
+// 		// console.log(clickedPt);
+// 		d3.select("#showPoint").text("Last Point Clicked: (" + x_coord + "," + y_coord + ")")
 
-		// Otherwise, show border and coordinates
-		} else {
-		    d3.select(this).attr("stroke", "black")
-		    d3.select(this).attr("stroke-width", "5")
+// 		// Otherwise, show border and coordinates
+// 		} else {
+// 		    d3.select(this).attr("stroke", "black")
+// 		    d3.select(this).attr("stroke-width", "5")
 		       	
-		    d3.select("#showPoint").text("Last Point Clicked: (" + x_coord + "," + y_coord + ")");
+// 		    d3.select("#showPoint").text("Last Point Clicked: (" + x_coord + "," + y_coord + ")");
 
-		};
-	};
-
+// 		};
+// 	};
 
 // Add point to scatterplot
 function addPoint() {
@@ -268,8 +297,8 @@ function addPoint() {
 	// Add point to scatterplot
     FRAME1.append("g")
 	        .append("circle")
-	        .attr("cx", (x_coord))
-			.attr("cy", (y_coord))
+	        .attr("cx", x_coord)
+			.attr("cy", y_coord)
 	        .attr("r", 10)
 	        .style("fill", "#CC0000")
 	        .attr("class", "point")
@@ -277,13 +306,11 @@ function addPoint() {
 	        .attr("transform", 
 			"translate(" + (125 + (x_coord-1) * 50)  + "," + ((475 - ((y_coord-1) * 50)) + ")"));
 
-	
 	    // Add event listeners to the new added points for mouseover, mouseleave, and click
 		FRAME1.selectAll(".point")
 				.on("mouseover", handleMouseover)
 				.on("mouseleave", handleMouseleave)
-				.on("click", onClick2); 
-
+				.on("click", onClick); 
 	}
 
 // Add event listener to subButton
