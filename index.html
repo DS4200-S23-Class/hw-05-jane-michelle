@@ -31,7 +31,49 @@
         <!-- Other children for the flexbox - right column -->
         <div id="column2"></div>
             <div id="showPoint"></div>
-    </div>
+        
+            <div>
+                <form id="x">
+                    <!-- set label for select element -->
+                    <label for="points">Select x coordinate for the new point you want to add: </label>
+                    <select id="x_coord" name="points" onchange="setXValue()">
+
+                    <!-- name is used to link together things in the same form -->
+                    <!-- added options under select --> 
+                    <option selected disabled>Choose one</option>
+                    <option name="coordinates" value="1"/>1</option>
+                    <option name="coordinates" value="2"/>2</option>
+                    <option name="coordinates" value="3"/>3</option>
+                    <option name="coordinates" value="4"/>4</option>
+                    <option name="coordinates" value="5"/>5</option>
+                    <option name="coordinates" value="6"/>6</option>
+                    <option name="coordinates" value="7"/>7</option>
+                    <option name="coordinates" value="8"/>8</option>
+                    <option name="coordinates" value="9"/>9</option>
+                    </select>
+
+                    <br>
+                    <!-- set label for select element -->
+                    <label for="points">Select y coordinate for the new point you want to add: </label>
+                    <select id="y_coord" name="points" onchange="setYValue()">
+
+                    <!-- added options under select --> 
+                    <option selected disabled>Choose one</option>
+                    <option name="coordinates" value="1"/>1</option>
+                    <option name="coordinates" value="2"/>2</option>
+                    <option name="coordinates" value="3"/>3</option>
+                    <option name="coordinates" value="4"/>4</option>
+                    <option name="coordinates" value="5"/>5</option>
+                    <option name="coordinates" value="6"/>6</option>
+                    <option name="coordinates" value="7"/>7</option>
+                    <option name="coordinates" value="8"/>8</option>
+                    <option name="coordinates" value="9"/>9</option>
+                    </select>
+                </form>
+                <!-- create submit button -->
+                <button type="submit" id="subButton">Add Point</button>
+            </div>
+        </div>
 
 
     <h3 class="centered">Acknowledgements</h3>
