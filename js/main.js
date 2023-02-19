@@ -1,6 +1,6 @@
 // set constants
-const FRAME_HEIGHT = 800;
-const FRAME_WIDTH = 800;
+const FRAME_HEIGHT = 600;
+const FRAME_WIDTH = 600;
 const MARGINS = {left: 75, right: 75, top: 75, bottom: 75};
 
 const VIS_HEIGHT = FRAME_HEIGHT - MARGINS.top - MARGINS.bottom;
@@ -112,16 +112,31 @@ function scatterPlot() {
 		       	d3.select(this).attr("stroke-width", "5")
 
 		       	d3.select("#showPoint").text("Last Point Clicked: (" + d["x"] + "," + d["y"] + ")");
- 
+
 		    };
 		}
+
+		// add a function to add a point to the graph when submit button is clicked
+		function addPoint(subButton){
+	
+			// set the x and y coordinate values for new point
+			let x_coord = document.getElementById('x_coord').value;
+			let y_coord = document.getElementById('y_coord').value;
+
+			let point = "{x:" + x_coord + "," + "y:" + y_coord + "}"
+			
+			let x = (x_coord * 45)
+			let y = (y_coord * 75)
+			
+		};
+
+			document.getElementById('subButton').addEventListener("click", () => {addPoint()});
 
 		// Add event listeners to the points for mouseover, mouseleave, and onclick
 		FRAME1.selectAll(".point")
 				.on("mouseover", handleMouseover)
 				.on("mouseleave", handleMouseleave)
-				.on("click", onClick);
-
+				.on("click", onClick); 
 	});
 }
 scatterPlot();
@@ -239,4 +254,15 @@ function barChart() {
 	});
 }
 barChart();
+
+
+// set x value for coordinate once selected value from options
+function setXValue() {
+	let x_coord = document.getElementById("x_coord").value;
+}
+
+// set y value for coordinate once selected value from options
+function setYValue() {
+	let y_coord = document.getElementById("y_coord").value;
+}
 
