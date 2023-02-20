@@ -42,7 +42,7 @@ function scatterPlot() {
 	        .attr("x", MARGINS.left + VIS_WIDTH/2)
 	        .attr("y", MARGINS.top - 25)
 	        .attr('text-anchor', "middle")
-	        .style("font-size", 18)
+	        .style("font-size", "18px")
 	        .text("Scatter Plot");
         
         // Label the x axis
@@ -50,7 +50,7 @@ function scatterPlot() {
 	        .attr("x", MARGINS.left + VIS_WIDTH/2)
 	        .attr("y", FRAME_HEIGHT)
 	        .attr("text-anchor", "middle")
-	        .style("font-size", 12)
+	        .style("font-size", "12px")
 	        .text("x");
         
         // Label the y axis
@@ -58,7 +58,7 @@ function scatterPlot() {
 	        .attr("text-anchor", "middle")
 	        .attr("x", MARGINS.left - 50)
 	        .attr("y", VIS_HEIGHT - 200)
-	        .style("font-size", 12)
+	        .style("font-size", "12px")
 	        .text("y");
 
 	    // Add tick marks for x axis
@@ -174,7 +174,7 @@ function barChart() {
 	        .attr("x", MARGINS.left + VIS_WIDTH/2)
 	        .attr("y", MARGINS.top - 25)
 	        .attr('text-anchor', "middle")
-	        .style("font-size", 18)
+	        .style("font-size", "18px")
 	        .text("Bar Chart");
         
         // Label the x axis
@@ -182,7 +182,7 @@ function barChart() {
 	        .attr("x", MARGINS.left + VIS_WIDTH/2)
 	        .attr("y", VIS_HEIGHT + 125)
 	        .attr("text-anchor", "middle")
-	        .style("font-size", 12)
+	        .style("font-size", "12px")
 	        .text("category");
         
         // Label the y axis 
@@ -190,7 +190,7 @@ function barChart() {
 	        .attr("text-anchor", "middle")
 	        .attr("x", MARGINS.left - 50)
 	        .attr("y", VIS_HEIGHT - 200)
-	        .style("font-size", 12)
+	        .style("font-size", "12px")
 	        .text("amount");
 
 	    // Add X axis and x ticks 
