@@ -25,10 +25,11 @@ body {
 
 /* Style axes color and width */
 .axes {
-	stroke: rgb(0, 0, 0);
+	stroke: #000000;
 	stroke-width: 2;
 }
 
+/* Format tooltip */
 .tooltip {
 	position: absolute;
 	background-color: grey;
@@ -38,24 +39,24 @@ body {
 	padding: 5px;
 }
 
-/* format button */
+/* Format button */
 button {
 	line-height: 1;
 	padding:5px;
 }
 
-/* format text size */
+/* Format text size */
 text {
 	font-size: 15px;
 }
 
-/* format select */
+/* Format select */
 select {
 	padding-inline: 5px;
 
 }
 
-/* format label */
+/* Format label */
 label {
 	line-height: 2.5;
 }

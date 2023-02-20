@@ -7,7 +7,7 @@
     <!-- Add title for webpage -->
     <title>hw-05</title>
 
-    <!-- link stylesheet -->
+    <!-- Link stylesheet -->
     <link rel="stylesheet" href="style.css">
 
     <!-- Link to d3 library -->
@@ -16,7 +16,7 @@
 
 
 <body>
-
+    <!-- Add centered header for webpage -->
     <h1 class="centered">hw-05: Interactive Graph with D3</h1>
 
     <!-- Container as the parent for the flexbox -->
@@ -29,55 +29,58 @@
         </div>
 
         <!-- Other children for the flexbox - right column -->
-        <div id="column2"></div>
-            <div id="showPoint"></div>
+        <div id="column2">
+            <!-- Show the last point clicked -->
+            <div id="showPoint">
+                Last point clicked: 
+            </div>
         
             <div>
+                <!-- Dropdown for x and y values -->
                 <form id="x">
-                    <!-- set label for select element -->
                     <label for="points">Select x coordinate for the new point you want to add: </label>
+                    <!-- Dropdown list -->
                     <select id="x_coord" name="points">
-
-                    <!-- name is used to link together things in the same form -->
-                    <!-- added options under select --> 
-                    <option selected disabled>Choose one</option>
-                    <option name="coordinates" value="1"/>1</option>
-                    <option name="coordinates" value="2"/>2</option>
-                    <option name="coordinates" value="3"/>3</option>
-                    <option name="coordinates" value="4"/>4</option>
-                    <option name="coordinates" value="5"/>5</option>
-                    <option name="coordinates" value="6"/>6</option>
-                    <option name="coordinates" value="7"/>7</option>
-                    <option name="coordinates" value="8"/>8</option>
-                    <option name="coordinates" value="9"/>9</option>
+                    <!-- Added options under select with 1 being the default --> 
+                    <option value="1" selected/>1</option>
+                    <option value="2"/>2</option>
+                    <option value="3"/>3</option>
+                    <option value="4"/>4</option>
+                    <option value="5"/>5</option>
+                    <option value="6"/>6</option>
+                    <option value="7"/>7</option>
+                    <option value="8"/>8</option>
+                    <option value="9"/>9</option>
                     </select>
 
                     <br>
-                    <!-- set label for select element -->
-                    <label for="points">Select y coordinate for the new point you want to add: </label>
-                    <select id="y_coord" name="points">
 
-                    <!-- added options under select --> 
-                    <option selected disabled>Choose one</option>
-                    <option name="coordinates" value="1"/>1</option>
-                    <option name="coordinates" value="2"/>2</option>
-                    <option name="coordinates" value="3"/>3</option>
-                    <option name="coordinates" value="4"/>4</option>
-                    <option name="coordinates" value="5"/>5</option>
-                    <option name="coordinates" value="6"/>6</option>
-                    <option name="coordinates" value="7"/>7</option>
-                    <option name="coordinates" value="8"/>8</option>
-                    <option name="coordinates" value="9"/>9</option>
+                    <label for="points">Select y coordinate for the new point you want to add: </label>
+                    <!-- Dropdown list -->
+                    <select id="y_coord" name="points">
+                    <!-- Added options under select with 1 being the default --> 
+                    <option value="1" selected/>1</option>
+                    <option value="2"/>2</option>
+                    <option value="3"/>3</option>
+                    <option value="4"/>4</option>
+                    <option value="5"/>5</option>
+                    <option value="6"/>6</option>
+                    <option value="7"/>7</option>
+                    <option value="8"/>8</option>
+                    <option value="9"/>9</option>
                     </select>
                 </form>
-                <!-- create submit button -->
+
+                <!-- Create submit button -->
                 <button type="submit" id="subButton">Add Point</button>
             </div>
         </div>
+    </div>
 
-
+    <!-- Centered acknowledgements header -->
     <h3 class="centered">Acknowledgements</h3>
     <div>
+        <!-- Links used -->
         <ul>
             <li>
                 <a href="https://www.educative.io/answers/how-to-create-a-scatter-plot-using-d3">D3 Scatterplot</a>
@@ -93,9 +96,16 @@
             </li>
             <li>
                 <a href="https://www.d3indepth.com/selections/">D3 Selections</a>
+            </li>
+            <li>
+                <a href="https://developer.mozilla.org/en-US/docs/Web/API/Element/getAttribute">Get Attribute</a>
             </li>        
+            <li>
+                <a href="https://www.tutorialsteacher.com/d3js/event-handling-in-d3js">Event Handling for D3</a>
+            </li>
         </ul>
     </div>
+
     <!-- Link js -->
     <script src="js/main.js"></script>
 
