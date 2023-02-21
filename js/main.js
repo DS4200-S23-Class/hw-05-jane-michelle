@@ -41,7 +41,7 @@ function scatterPlot() {
         FRAME1.append("text")
 	        .attr("x", MARGINS.left + VIS_WIDTH/2)
 	        .attr("y", MARGINS.top - 25)
-	        .attr('text-anchor', "middle")
+	        .attr("text-anchor", "middle")
 	        .style("font-size", "18px")
 	        .text("Scatter Plot");
         
@@ -88,7 +88,7 @@ function scatterPlot() {
 	        .style("fill", "#CC0000")
 	        .attr("stroke", "none")
 	        .attr("class", "point")
-	        .attr("id", (d) => { return '(' + d.x + ', ' + d.y + ')'; });
+	        .attr("id", (d) => { return "(" + d.x + "," + d.y + ")"; });
 
 	
 	    // Function that changes color of dots when moused over 
@@ -142,7 +142,7 @@ function scatterPlot() {
 			        .style("fill", "#CC0000")
 			        .attr("stroke", "none")
 					.attr("class", "point")
-					.attr("id", '(' + x_coord + ', ' + y_coord + ')');
+					.attr("id", "(" + x_coord + "," + y_coord + ")");
 
 			// Add event listeners to the points for mouseover, mouseleave, and onclick
 			FRAME1.selectAll(".point")
@@ -173,7 +173,7 @@ function barChart() {
         FRAME2.append("text")
 	        .attr("x", MARGINS.left + VIS_WIDTH/2)
 	        .attr("y", MARGINS.top - 25)
-	        .attr('text-anchor', "middle")
+	        .attr("text-anchor", "middle")
 	        .style("font-size", "18px")
 	        .text("Bar Chart");
         
